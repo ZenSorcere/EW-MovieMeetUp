@@ -1,4 +1,3 @@
-import { templateJitUrl } from "@angular/compiler";
 import { Injectable } from "@angular/core";  
 import { Resolve, ActivatedRouteSnapshot} from "@angular/router";  
 import { Observable } from "rxjs";  
