@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   imdbApiKey: "",
   demoUserID: "DEMO",
   loginURL: "https://ike-easyware.herokuapp.com/home",
