@@ -16,9 +16,9 @@ export class FinalRankingResolve implements Resolve<MovieEvent> {
   constructor(private apicall: ApicallService) {}  
   
   resolve(route: ActivatedRouteSnapshot): Observable<MovieEvent> {  
-    console.log("the final ranking resolve has completed", route);
+    //*console.log("the final ranking resolve has completed", route);
     this.routeParams = route.paramMap.get('eventID');
-    console.log("eventID from resolve: ", this.routeParams);
+    //*console.log("eventID from resolve: ", this.routeParams);
 
     return this.apicall.getFinalRankings(this.routeParams);
   }

@@ -37,13 +37,13 @@ export class AppComponent implements OnInit {
   loadMovies() {
     if (environment.production === false) {
       this.Movie = <MovieItem[]>movielist
-      console.log("fake array: " + this.Movie);
+      //*console.log("fake array: " + this.Movie);
       return this.Movie;
     } else {
     return this.apicall.getMovies("Star Wars").subscribe((data) => {
       this.Movie = data;
-      console.log(data);
-      console.log(this.Movie[0]);
+      //*console.log(data);
+      //*console.log(this.Movie[0]);
       })
     }
   }
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
 
   submitUserID() {
     this.userID = this.value;
-    console.log("User ID: " + this.userID);
+    //*console.log("User ID: " + this.userID);
   }
 
   rankMovies() {
@@ -87,9 +87,9 @@ export class AppComponent implements OnInit {
 
   submitRanking() {
     this.rankMovies();
-    console.log("Highest rank: " + this.highestRank);
+    //*console.log("Highest rank: " + this.highestRank);
 
-    console.log("User ID: " + this.userID);
+    //*console.log("User ID: " + this.userID);
 
     for (let entry of this.movieRankings.entries()) {
       console.log(entry[0], entry[1]);

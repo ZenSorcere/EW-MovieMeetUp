@@ -13,7 +13,7 @@ export class EventService {
     let count = 0;
     this.movies.forEach(movie=> count += movie.shows[0].show.length);
     //return this.movies.length;
-    console.log("getNumSelected: ", count);
+    //*console.log("getNumSelected: ", count);
     return count;
   }
 
@@ -37,12 +37,12 @@ export class EventService {
     }
     // make this.movies equal the passed array
     this.movies = movieArr;
-    console.log("add date array to eventMovies: ", this.movies);
+    //*console.log("add date array to eventMovies: ", this.movies);
   }
 
   addMovieToEvent(ewMovieItem: EWMovieItem) {
     this.movies.push(ewMovieItem);
-    console.log(this.movies);
+    //*console.log(this.movies);
   }
 
   removeMovieFromEvent(ewMovieItem: EWMovieItem) {
@@ -51,12 +51,12 @@ export class EventService {
         this.movies.splice(i,1);
       }
     }
-    console.log(this.movies);
+    //*console.log(this.movies);
   }
 
   resetMovieArray() {
     this.movies.length = 0;
-    console.log("selected movies cleared");
+    //*console.log("selected movies cleared");
     return this.movies;
     
   }

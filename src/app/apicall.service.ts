@@ -73,9 +73,9 @@ export class ApicallService {
 
          map((data: any) =>  {
           
-          console.log(data);
+          //*console.log(data);
           
-          console.log(`getEWMovies() data.Items: ${data.events}`);
+          //*console.log(`getEWMovies() data.Items: ${data.events}`);
           return data ?? [];
         })
       )
@@ -101,8 +101,8 @@ export class ApicallService {
     .pipe(
       map((data) => {
         //console.log('body: ' + JSON.parse(body.eventTitle));
-        console.table(data);
-        console.log('data: ' + JSON.stringify(data,null,2));
+        //*console.table(data);
+        //*console.log('data: ' + JSON.stringify(data,null,2));
         return JSON.stringify(data);
         return JSON.parse(data.eventDate);
       })
@@ -129,7 +129,7 @@ export class ApicallService {
 
         map((data) => {
           //console.log(data);
-          console.log("ApiService- getMovieEvents() completed");
+          //*console.log("ApiService- getMovieEvents() completed");
           return data.Items ?? [];
         })
       )
@@ -142,12 +142,12 @@ export class ApicallService {
     //console.log("id for queryStringParameters:", id);
     const options = id ? 
     { params : new HttpParams().set('id', id)} : {};
-    console.log("options for the MovieEvent: ", options);
+    //*console.log("options for the MovieEvent: ", options);
     return this.http.get<MovieEvent>(`https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/getEWMovieEvent`, options).
       pipe(
         map((data) => {
-          console.log(data);
-          console.log("getMovieEvent() data: " + JSON.stringify(data));
+          //*console.log(data);
+          //*console.log("getMovieEvent() data: " + JSON.stringify(data));
           return data ?? [];
         })
       )
@@ -159,12 +159,12 @@ export class ApicallService {
     //console.log("id for queryStringParameters:", id);
     const options = id ? 
     { params : new HttpParams().set('id', id)} : {};
-    console.log("options for the FinalRanking: ", options);
+    //*console.log("options for the FinalRanking: ", options);
     return this.http.get<MovieEvent>(`https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/EWFinalRankings`, options).
       pipe(
         map((data) => {
-          console.log(data);
-          console.log("getFinalRankings() data: " + JSON.stringify(data));
+          //*console.log(data);
+          //*console.log("getFinalRankings() data: " + JSON.stringify(data));
           return data ?? [];
         })
       )
