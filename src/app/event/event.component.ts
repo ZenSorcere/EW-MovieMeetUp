@@ -78,11 +78,11 @@ export class EventComponent implements OnInit {
   // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
   // Current gives CORS error and the GET fails.
   loadEWMovies() { //async(): Promise<Array<EWMovieItem> | any> => {
-    console.log("loadEWMovies called");
+    //*console.log("loadEWMovies called");
     return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
-      console.log("loadEWMovies data:", this.eventMovies);
-      console.log(this.eventMovies[0]);
+      //*console.log("loadEWMovies data:", this.eventMovies);
+      //*console.log(this.eventMovies[0]);
       //let objCheck = this.eventMovies[2].shows[0].show;
       /*if (Object.prototype.toString.call(objCheck) === '[object Array]') {
         console.log("objCheck is an array");
@@ -103,13 +103,13 @@ export class EventComponent implements OnInit {
       //console.log(attempt);
       //let test = new Date(attempt);   // new Date(parseInt(seconds)*1000)
       //this.convertToDate(test);
-      console.log("tada?: ", this.unixConvert(seconds));
+      //*console.log("tada?: ", this.unixConvert(seconds));
       let secTest = new Date(parseInt(seconds) * 1e3).toISOString().substring(0,23);
-      console.log(secTest);
+      //*console.log(secTest);
       let altTest = new Date(parseInt(altSec) * 1e3).toISOString().substring(0,23);
-      console.log(altTest);
-      console.log('compare? ', secTest < altTest);
-      console.log('getHours: ', this.hoursConvert(seconds));
+      //*console.log(altTest);
+      //*console.log('compare? ', secTest < altTest);
+      //*console.log('getHours: ', this.hoursConvert(seconds));
       //console.log(test);
       })
   }
@@ -155,14 +155,14 @@ export class EventComponent implements OnInit {
 
   // CREATE "convertToDate" function to convert the date string to a Date object.
   convertToDate(dateString: Date): Date {
-    console.log("dateString: ", dateString);
+    //*console.log("dateString: ", dateString);
     let year = dateString.getFullYear();
     let month = dateString.getMonth()+1; 
     let dt = dateString.getDate();
     let date = year + '-' + (month<10 ? '0' : '') + month + '-' + (dt<10 ? '0' : '') + dt;
     //let d = new Date(date);
     let d = dateString.getDay() + ' ' + dateString.toLocaleDateString() + ' ' + dateString.toTimeString().substring(0, dateString.toTimeString().indexOf("GMT"));
-    console.log(d);
+    //*console.log(d);
     return new Date(d);
     //let dateParts = dateString.split("-");
     //return new Date(+dateParts[0], dateParts[1] - 1, +dateParts[2]);
@@ -175,15 +175,15 @@ export class EventComponent implements OnInit {
       console.log("reloading movies")
       this.loadEWMovies();
     } */
-    console.log(event.value);
+    //*console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
-    console.log("New EventDate: " + this.eventDate);
+    //*console.log("New EventDate: " + this.eventDate);
     //this.loadEWMovies().then(() => this.filterMovies(this.eventDate));
     
     
     //let timeoutID = setTimeout(this.filterMovies(this.eventDate), 300);
     let test = setTimeout(() => {
-      console.log("attempting to filter eventMovies")
+      //*console.log("attempting to filter eventMovies")
       this.filterMovies(this.eventDate);
     }, 500);  
     // clear error message if there was one from a previous date selection and attempted event creation.
@@ -203,10 +203,10 @@ export class EventComponent implements OnInit {
     if (this.timeFilteredMovies.length > 0) {
       this.timeFilteredMovies.length = 0;
     }
-    console.log('filteredMovies() triggered')
+    //*console.log('filteredMovies() triggered')
     let filtered: EWMovieItem[] = JSON.parse(JSON.stringify(this.eventMovies));
     let target = eventDate.substring(0,11);
-    console.log('target date: ', target)
+    //*console.log('target date: ', target)
     // this will filter for the selected date:
     let arr = filtered.filter(film => {
       //return film.shows[0].show.includes()
@@ -221,7 +221,7 @@ export class EventComponent implements OnInit {
             break;
         } */
     });
-    console.log('arr?: ', arr);
+    //*console.log('arr?: ', arr);
     let selectedDate = [target];
     //this will update the shows listings for just the selected date instead of passing all screenings
     let filteredArr = arr.map(result=> {
@@ -235,8 +235,8 @@ export class EventComponent implements OnInit {
     this.eventService.addFilteredMoviesToEvent(this.filteredMovies);
     */
     //this.selectedMovies = this.filteredMovies;
-    console.log("filtered Movies: ", this.filteredMovies);
-    console.log("original Movies: ", this.eventMovies);
+    //*console.log("filtered Movies: ", this.filteredMovies);
+    //*console.log("original Movies: ", this.eventMovies);
   }
 
   // function for filtering by daytime ranges:
@@ -267,15 +267,15 @@ export class EventComponent implements OnInit {
       end = 23;
       ranges = Array.from({length: 8}, (x,i) => i + start); //17-24
     }
-    console.log(range, ranges);
+    //*console.log(range, ranges);
       let arr = timeFiltered.filter(scr => {
         let screenings = scr.shows[0].show;
-        console.log(this.hoursConvert(screenings[0].timestamp));
-        console.log('range? ',this.hoursConvert(screenings[0].timestamp))//.substr(-2,2));
+        //*console.log(this.hoursConvert(screenings[0].timestamp));
+        //*console.log('range? ',this.hoursConvert(screenings[0].timestamp))//.substr(-2,2));
         return screenings.some((entry) => this.hoursConvert(entry.timestamp) >= start && this.hoursConvert(entry.timestamp) <= end)
         //if(this.unixConvert(entry.timestamp).substring(13) > start && this.unixConvert(entry.timestamp).substring(13) < end) {
       });
-      console.log('arr=', arr);
+      //*console.log('arr=', arr);
       if (arr.length == 0) {
         this.errormsg = `No movies are showing in the ${range}. Try another time range.`
         //this.resetFilters();
@@ -294,23 +294,23 @@ export class EventComponent implements OnInit {
       } else {*/
         this.eventService.addFilteredMoviesToEvent(this.timeFilteredMovies);
       //}
-      console.log("time filtered: ", this.timeFilteredMovies);
-      console.log("original filtered: ", this.filteredMovies);
+      //*console.log("time filtered: ", this.timeFilteredMovies);
+      //*console.log("original filtered: ", this.filteredMovies);
     
   }
 
   resetFilters() {
     this.timeFilteredMovies.length = 0;
     this.filterMovies(this.eventDate);
-    console.log('filters reset');
+    //*console.log('filters reset');
   }
 
   confmessage(): void {
     this.confirmed = true;
-    console.log("confirmed: " + this.confirmed);
+    //*console.log("confirmed: " + this.confirmed);
     setTimeout(() => {
       this.confirmed = false;
-      console.log("confirmed: " + this.confirmed);
+      //*console.log("confirmed: " + this.confirmed);
     }, 4000);
   }
 
@@ -343,12 +343,12 @@ export class EventComponent implements OnInit {
       selectedMovies : [...this.eventService.getSelectedMovies()]
     };
     // Verify newEvent object created with correct info successfully
-    console.log(JSON.stringify(newEvent));
+    //*console.log(JSON.stringify(newEvent));
 
     // Add MovieEvent object to the events map, with the eventID as a key
     this.events.set(this.eventID, newEvent);
     // Verify MovieEvent was added to events map
-    console.log(this.events.get(this.eventID));
+    //*console.log(this.events.get(this.eventID));
 
     // Display all MovieEvent objects in the events map
     for (let entry of this.events.entries()) {
@@ -369,10 +369,10 @@ export class EventComponent implements OnInit {
     this.loadEWMovies();
     this.confmsg = `Your event for "${newEvent.eventDate}" has been created!`;
     this.confmessage();
-    console.log("timefilt: ", this.timeFilteredMovies);
-    console.log("datefilt: ", this.filteredMovies);
-    console.log('date',this.eventDate);
-    console.log('selectedMovs', this.selectedMovies);
+    //*console.log("timefilt: ", this.timeFilteredMovies);
+    //*console.log("datefilt: ", this.filteredMovies);
+    //*console.log('date',this.eventDate);
+    //*console.log('selectedMovs', this.selectedMovies);
     //return newEvent;
   }
 

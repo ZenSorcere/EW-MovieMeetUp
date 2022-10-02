@@ -18,9 +18,9 @@ export class MovieEventResolve implements Resolve<MovieEvent> {
     //console.log("the ranking resolve has completed");
     //return this.apicall.getMovieEvents();
 
-    console.log("the ranking resolve has completed", route);
+    //*console.log("the ranking resolve has completed", route);
     this.routeParams = route.paramMap.get('eventID');
-    console.log("eventID from resolve: ", this.routeParams);
+    //*console.log("eventID from resolve: ", this.routeParams);
 
     return this.apicall.getMovieEvent(this.routeParams);
   }  

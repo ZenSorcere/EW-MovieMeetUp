@@ -75,7 +75,7 @@ export class RankingComponent implements OnInit {
 
     // Find the event that corresponds with the id provided in route
     this.movieEvent = this.route.snapshot.data.movieEvent;
-    console.log("movieEvent", this.movieEvent);
+    //*console.log("movieEvent", this.movieEvent);
     //this.findMovieEventByEventID();
     
     this.loadMoviesFromEvent();
@@ -100,9 +100,9 @@ export class RankingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => {
-        console.log(`Dialog output: ${data}`)
+        //*console.log(`Dialog output: ${data}`)
         this.userID = data;
-        console.log(`entered name: ${this.userID}`);
+        //*console.log(`entered name: ${this.userID}`);
       });
   }
 
@@ -112,16 +112,16 @@ export class RankingComponent implements OnInit {
       // make sure the hostID and eventIDs match
       if ((this.movieEvents[index].hostID == this.hostID && this.movieEvents[index].id == this.eventIDFromRoute )) {
         this.movieEvent = this.movieEvents[index];
-        console.log("adding movieEvent: ", this.movieEvent);
+        //*console.log("adding movieEvent: ", this.movieEvent);
         const testdate = new Date( Date.parse(this.movieEvent.eventDate) )
         const today = new Date();
-        console.log("TESTDATE?: " + testdate);
+        //*console.log("TESTDATE?: " + testdate);
         if (this.getDifferenceInDays(today,testdate) < 1) {
           this.router.navigateByUrl(`finalranking/${this.eventIDFromRoute}`);
         }
-        console.log("today get time: " + today.getTime());
-        console.log("testdate get time: " + testdate.getTime());
-        console.log("getDifferenceInDays: " + this.getDifferenceInDays(today, testdate));
+        //*console.log("today get time: " + today.getTime());
+        //*console.log("testdate get time: " + testdate.getTime());
+        //*console.log("getDifferenceInDays: " + this.getDifferenceInDays(today, testdate));
       }
     }
   }
@@ -140,7 +140,7 @@ export class RankingComponent implements OnInit {
       //this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.rankingService.separateScreenings(this.movieEvent.eventMovies!);
-      console.log('LMFE:', this.movieItemArray[0].shows[0].show[0].timestamp);
+      //*console.log('LMFE:', this.movieItemArray[0].shows[0].show[0].timestamp);
 /*
       const testdate = new Date( Date.parse(this.movieEvent.eventDate) )
       const today = new Date();
@@ -179,12 +179,12 @@ export class RankingComponent implements OnInit {
 
   submitUserID() {
     this.userID = this.value;
-    console.log("User ID: " + this.userID);
+    //*console.log("User ID: " + this.userID);
   }
 
   confmessage(): void {
     this.confirmed = true;
-    console.log("confirmed: " + this.confirmed);
+    //*console.log("confirmed: " + this.confirmed);
     /* setTimeout(() => {
       this.confirmed = false;
       console.log("confirmed: " + this.confirmed);
@@ -198,13 +198,13 @@ export class RankingComponent implements OnInit {
     } else {
       this.errorMsg = '';
     }
-    console.log("User ID: " + this.userID);
-    console.log("Highest rank: " + this.highestRank);
+    //*console.log("User ID: " + this.userID);
+    //*console.log("Highest rank: " + this.highestRank);
 
-    for (let entry of this.movieRankings.entries()) {
+    /*for (let entry of this.movieRankings.entries()) {
       console.log('movie title: ' + entry[0])
       //console.log('points: ' + entry[1]);
-    }
+    }*/
 
 
     
@@ -214,9 +214,9 @@ export class RankingComponent implements OnInit {
       UserRankings: this.movieItemArray
     }
     
-    console.log('rankingUpdate: ' + JSON.stringify(rankingUpdate));
-    console.log(typeof(rankingUpdate));
-    console.log('rankings: ' + JSON.stringify(rankingUpdate.UserRankings));
+    //*console.log('rankingUpdate: ' + JSON.stringify(rankingUpdate));
+    //*console.log(typeof(rankingUpdate));
+    //*console.log('rankings: ' + JSON.stringify(rankingUpdate.UserRankings));
 
     // THEN invoke apicall to put rankings into the DB.
     this.apicall.addUserRankings(rankingUpdate).subscribe(data => console.log(data));

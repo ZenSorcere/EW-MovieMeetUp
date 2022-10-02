@@ -27,20 +27,20 @@ export class AuthService {
 
     if (sessionStorage.getItem("hostID") === null) {
       var url = new URL(window.location.href.replace('#', '?'));
-      console.log("URL: " + url);
-      console.log("href: "+ window.location.href);
+      //*console.log("URL: " + url);
+      //*console.log("href: "+ window.location.href);
 
       const urlSearchParams = url.searchParams;
-      console.log("urlSP: "+ urlSearchParams);
+      //*console.log("urlSP: "+ urlSearchParams);
       this.idToken = String(url.searchParams.get("id_token"));
       this.accessToken = String(url.searchParams.get("access_token"));
       
-      console.log("idToken: " + this.idToken);
-      console.log("accessToken: " + this.accessToken);
+      //*console.log("idToken: " + this.idToken);
+      //*console.log("accessToken: " + this.accessToken);
 
       const decoded = jwtDecode<JwtPayloadCognito>(this.idToken);
       // do we need to decode the accessToken, as well?  Not sure when that will be needed, possibly for Creating Events
-      console.log(decoded);
+      //*console.log(decoded);
 
       sessionStorage.setItem('hostID', decoded.preferred_username);
       sessionStorage.setItem('id_token', this.idToken);
@@ -48,9 +48,9 @@ export class AuthService {
 
       //this.isLoggedIn = true;
 
-      console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
-      console.log("session storage-idToken: " + sessionStorage.getItem('id_token')); 
-      console.log("session storage-accessToken: " + sessionStorage.getItem('access_token'));
+      //*console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
+      //*console.log("session storage-idToken: " + sessionStorage.getItem('id_token')); 
+      //*console.log("session storage-accessToken: " + sessionStorage.getItem('access_token'));
 
       
     } 

@@ -71,7 +71,7 @@ export class FinalRankingComponent implements OnInit {
 
       if (this.movieEvent.finalRankings != undefined) {
         this.finalRankings = this.movieEvent.finalRankings;
-        console.log("finalRanking: ", JSON.stringify(this.movieEvent.finalRankings));
+        //*console.log("finalRanking: ", JSON.stringify(this.movieEvent.finalRankings));
       }
       
       if (this.movieEvent.id) {
@@ -86,12 +86,12 @@ export class FinalRankingComponent implements OnInit {
   }
 
   checkPointTie() {
-    console.log("???", this.finalRankings[0].screeninglink!);
+    //*console.log("???", this.finalRankings[0].screeninglink!);
     let max = this.finalRankings[0].points;
     for (let finalRanking in this.finalRankings) {
       if (max == this.finalRankings[finalRanking].points) {
         this.topChoices.push(" " + this.finalRankings[finalRanking].title);
-        console.log("top choices: ", this.topChoices);
+        //*console.log("top choices: ", this.topChoices);
       }
     }
   }

@@ -17,24 +17,24 @@ export class RankingService {
   // Loads all events created by hostID for the homepage
   loadMovieEventsByHostID(demoID: String) { //: Promise<MovieEvent[]>
     this.apicall.getMovieEvents().subscribe((data) => {
-      console.log('lmebi: ', data);
+      //*console.log('lmebi: ', data);
       const today = Date.parse(Date().toString().substring(0, 15));
-      console.log('today: ', today);
+      //*console.log('today: ', today);
       for (let index in data) {
         let dateCheck = Date.parse(data[index].eventDate);
-        console.log('dateCheck: ', dateCheck)
+        //*console.log('dateCheck: ', dateCheck)
         // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array
         // also compares eventDate to today, and removes past events
         if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id) && (dateCheck >= today)) {
-          console.log(data[index].eventDate);
-          console.log(Date.parse(data[index].eventDate));
+          //*console.log(data[index].eventDate);
+          //*console.log(Date.parse(data[index].eventDate));
           this.movieEvents.push(data[index]);
         }
       }
       this.sortMovieEvents();
     });
-    console.log('RankingService-getMovieEventsByHostID completed: ' + this.movieEvents); 
-    console.log('movieEvents[] length:', this.movieEvents.length);
+    //*console.log('RankingService-getMovieEventsByHostID completed: ' + this.movieEvents); 
+    //*console.log('movieEvents[] length:', this.movieEvents.length);
     
     
     return this.movieEvents;
@@ -65,13 +65,13 @@ export class RankingService {
     let single: EWMovieItem;
     let repArray: EWMovieItem[] = [];
     for (let movie of movieItemArray) {
-      console.log(movie.title, movie.shows[0].show.length);
+      //*console.log(movie.title, movie.shows[0].show.length);
       if (movie.shows[0].show.length == 1) {
         repArray.push(movie);
       } else {
         for(let screening of movie.shows[0].show) {
           single = JSON.parse(JSON.stringify(movie));
-          console.log('screening:', screening.timestamp);
+          //*console.log('screening:', screening.timestamp);
           single.shows[0].show[0] = screening;
           repArray.push(single);
         }
