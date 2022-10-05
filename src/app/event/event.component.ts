@@ -18,7 +18,7 @@ import { MatSidenavModule, MatDrawerToggleResult } from "@angular/material/siden
 export interface MovieEvents {
   searchType: string;
   expression: string;
-  Items?: (MovieEvent)[] | null;
+  Items: (MovieEvent)[]; // | null
   errorMessage: string;
 }
 
@@ -61,24 +61,24 @@ export class EventComponent implements OnInit {
   date = new FormControl(new Date());
   gridColumns = 3;
   minDate = new Date();
-  rangeActive = false;
+  rangeBlock = true;
   //objCheck: Shows[] = [];
   public isMenuOpen: boolean = true;
 
-  constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient) {}
+  constructor(public apicall: ApicallService, private eventService: EventService, private httpClient: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     //this.loadEWMovies();
     // set minDate for datepicker to be 'tomorrow'--no past dates or picking today.
     this.minDate.setDate(this.minDate.getDate() +1);
-    
+    console.log("onInit:", this.eventDate);
   }
 
   // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
   // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
   // Current gives CORS error and the GET fails.
   loadEWMovies() { //async(): Promise<Array<EWMovieItem> | any> => {
-    //*console.log("loadEWMovies called");
+    console.log("loadEWMovies called");
     return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
       //*console.log("loadEWMovies data:", this.eventMovies);
@@ -92,8 +92,8 @@ export class EventComponent implements OnInit {
       //console.log('0 typeof', typeof this.eventMovies[0].shows[0].show[0]);
       //console.log(this.eventMovies[2].shows[0].show);
       //console.log('2 typeof', typeof this.eventMovies[2].shows[0].show[0]);
-      let seconds = "1652383800"
-      let altSec = "1657911417"
+      //let seconds = "1652383800"
+      //let altSec = "1657911417"
       //let time = (s: any) => new Date(s * 1e3).toISOString(); //.slice(-13, -8);
       // YYYY-MM-DDTHH:mm:ss.sssZ
       // .slice(-13, -5) = 19:30:00
@@ -104,9 +104,9 @@ export class EventComponent implements OnInit {
       //let test = new Date(attempt);   // new Date(parseInt(seconds)*1000)
       //this.convertToDate(test);
       //*console.log("tada?: ", this.unixConvert(seconds));
-      let secTest = new Date(parseInt(seconds) * 1e3).toISOString().substring(0,23);
+      //let secTest = new Date(parseInt(seconds) * 1e3).toISOString().substring(0,23);
       //*console.log(secTest);
-      let altTest = new Date(parseInt(altSec) * 1e3).toISOString().substring(0,23);
+      //let altTest = new Date(parseInt(altSec) * 1e3).toISOString().substring(0,23);
       //*console.log(altTest);
       //*console.log('compare? ', secTest < altTest);
       //*console.log('getHours: ', this.hoursConvert(seconds));
@@ -175,20 +175,24 @@ export class EventComponent implements OnInit {
       console.log("reloading movies")
       this.loadEWMovies();
     } */
-    //*console.log(event.value);
+    console.log(event.value);
     this.eventDate = `${event.value}`.substring(0, 15);
-    //*console.log("New EventDate: " + this.eventDate);
+    console.log("New EventDate: " + this.eventDate);
     //this.loadEWMovies().then(() => this.filterMovies(this.eventDate));
     
     
     //let timeoutID = setTimeout(this.filterMovies(this.eventDate), 300);
     let test = setTimeout(() => {
-      //*console.log("attempting to filter eventMovies")
+      console.log("attempting to filter eventMovies")
       this.filterMovies(this.eventDate);
-    }, 500);  
+      console.log("eventMoviesTO:", this.eventMovies.length);
+      console.log("datefilteredTO:", this.filteredMovies.length);
+      this.rangeBlock = false; 
+    }, 1000);
     // clear error message if there was one from a previous date selection and attempted event creation.
     this.errormsg = '';
-
+    console.log("eventMovies:", this.eventMovies.length);
+    console.log("datefiltered:", this.filteredMovies.length);
     /*if (this.eventMovies != []) {
       console.log("clearing Tiemout");
       clearTimeout(test);
@@ -244,11 +248,12 @@ export class EventComponent implements OnInit {
 
     filterMoviesByTime(range: string) {  //morning/afternoon/evening
       this.errormsg = '';
-    if (this.eventDate === '') {
+    if (this.eventMovies.length == 0) {
+      console.log("no date selected!!");
       this.errormsg = "Please select a Date first.";
       //this.resetFilters();
-      //this.timeFilteredMovies.length = 0;
-      //return;
+      this.timeFilteredMovies.length = 0;
+      return;
     }
     let targetRange = '';
     let timeFiltered: EWMovieItem[] = JSON.parse(JSON.stringify(this.filteredMovies));
@@ -276,7 +281,7 @@ export class EventComponent implements OnInit {
         //if(this.unixConvert(entry.timestamp).substring(13) > start && this.unixConvert(entry.timestamp).substring(13) < end) {
       });
       //*console.log('arr=', arr);
-      if (arr.length == 0) {
+      if (this.eventDate != '' && arr.length == 0) {
         this.errormsg = `No movies are showing in the ${range}. Try another time range.`
         //this.resetFilters();
         //return;
@@ -301,8 +306,9 @@ export class EventComponent implements OnInit {
 
   resetFilters() {
     this.timeFilteredMovies.length = 0;
+    this.errormsg = '';
     this.filterMovies(this.eventDate);
-    //*console.log('filters reset');
+    console.log('filters reset');
   }
 
   confmessage(): void {
@@ -359,7 +365,7 @@ export class EventComponent implements OnInit {
     })
     this.apicall.addMovieEvent(newEvent).subscribe();
     //this.eventTitle = '';
-    this.eventDate = '';
+    //this.eventDate = '';
     this.errormsg = '';
     this.date = new FormControl(new Date());
     //this.labelReset();
@@ -369,6 +375,11 @@ export class EventComponent implements OnInit {
     this.loadEWMovies();
     this.confmsg = `Your event for "${newEvent.eventDate}" has been created!`;
     this.confmessage();
+    setTimeout(() => {
+      //*console.log("attempting to filter eventMovies")
+      this.router.navigateByUrl('home');
+    }, 4000); 
+    
     //*console.log("timefilt: ", this.timeFilteredMovies);
     //*console.log("datefilt: ", this.filteredMovies);
     //*console.log('date',this.eventDate);

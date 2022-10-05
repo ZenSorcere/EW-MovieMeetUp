@@ -54,9 +54,9 @@
       </div> -->
       <mat-radio-group aria-label="Select a time filter option">
         <!-- <mat-radio-button value=""color="primary" checked>none</mat-radio-button> -->
-        <mat-radio-button value="morning" (change)="filterMoviesByTime($event.value)" >Morning only</mat-radio-button>
-        <mat-radio-button value="afternoon" (change)="filterMoviesByTime($event.value)" >Afternoon only</mat-radio-button>
-        <mat-radio-button value="evening" (change)="filterMoviesByTime($event.value)" >Evening only</mat-radio-button>
+        <mat-radio-button value="morning" (change)="filterMoviesByTime($event.value)" [disabled]="rangeBlock" >Morning only</mat-radio-button>
+        <mat-radio-button value="afternoon" (change)="filterMoviesByTime($event.value)" [disabled]="rangeBlock" >Afternoon only</mat-radio-button>
+        <mat-radio-button value="evening" (change)="filterMoviesByTime($event.value)" [disabled]="rangeBlock" >Evening only</mat-radio-button>
         <mat-radio-button value="clear times" (change)="resetFilters()" [checked]="timeFilteredMovies.length === 0">All Day</mat-radio-button>
         <!-- <mat-radio-button value="afternoon">afternoon</mat-radio-button>
         <mat-radio-button value="evening">evening</mat-radio-button> -->
