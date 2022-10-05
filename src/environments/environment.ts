@@ -8,8 +8,13 @@ export const environment = {
   demoUserID: "DEMO",
   loginURL: "https://ike-easyware.herokuapp.com/home",
   logoutURL: "https://ike-easyware.herokuapp.com/intro"
+  
 };
-/* loginURL: "http://localhost:4200/home",
+/* 
+  loginURL: "https://ike-easyware.herokuapp.com/home",
+  logoutURL: "https://ike-easyware.herokuapp.com/intro"
+
+  loginURL: "http://localhost:4200/home",
   logoutURL: "http://localhost:4200/intro"
 */
   

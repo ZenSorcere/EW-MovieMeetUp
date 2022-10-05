@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { promises } from 'dns';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,20 +18,26 @@ export class RankingService {
   // Loads all events created by hostID for the homepage
   loadMovieEventsByHostID(demoID: String) { //: Promise<MovieEvent[]>
     this.apicall.getMovieEvents().subscribe((data) => {
-      //*console.log('lmebi: ', data);
+      console.log('lmebi: ', data);
       const today = Date.parse(Date().toString().substring(0, 15));
-      //*console.log('today: ', today);
-      for (let index in data) {
-        let dateCheck = Date.parse(data[index].eventDate);
-        //*console.log('dateCheck: ', dateCheck)
-        // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array
-        // also compares eventDate to today, and removes past events
-        if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id) && (dateCheck >= today)) {
-          //*console.log(data[index].eventDate);
-          //*console.log(Date.parse(data[index].eventDate));
-          this.movieEvents.push(data[index]);
+      console.log('today: ', today);
+      //setTimeout(() => {
+      if (data) {
+        for (let index in data) {
+          let dateCheck = Date.parse(data[index].eventDate);
+          //*console.log('dateCheck: ', dateCheck)
+          // make sure the hostID equals the demoID, and that the id does not already exist in the movieEvents array
+          // also compares eventDate to today, and removes past events
+          if ((data[index].hostID == demoID) && (data[index].id != (this.movieEvents.find(event => event.id == data[index].id))?.id) && (dateCheck >= today)) {
+            //*console.log(data[index].eventDate);
+            //*console.log(Date.parse(data[index].eventDate));
+            console.log("attempting moviEvents.push");
+            this.movieEvents.push(data[index]); 
+          }
         }
       }
+      //}, 4000);
+
       this.sortMovieEvents();
     });
     //*console.log('RankingService-getMovieEventsByHostID completed: ' + this.movieEvents); 
