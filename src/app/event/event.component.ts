@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, ResolvedReflectiveFactory } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { MovieItem, PopMovieItem, EWMovieItem, Shows } from "../movies";
 import { ApicallService } from '../apicall.service';
@@ -77,8 +77,23 @@ export class EventComponent implements OnInit {
   // CALL SCAN API GATEWAY HERE? --> https://ri86qpqtti.execute-api.us-west-2.amazonaws.com/popMovies
   // Attempt to create a function that references the getPopMovies from the apicallservice. This is probably the wrong way?
   // Current gives CORS error and the GET fails.
-  loadEWMovies() { //async(): Promise<Array<EWMovieItem> | any> => {
+  /*loadtheMovies = new Promise<Array<EWMovieItem>>((resolve) => {
+    this.apicall.getEWMovies().subscribe((data) => {
+      this.eventMovies = data;
+    })
+    resolve(this.eventMovies)
+  });*/
+
+  
+  loadEWMovies(): Promise<Array<EWMovieItem> | any> { //async(): Promise<Array<EWMovieItem> | any> => {
     console.log("loadEWMovies called");
+    return new Promise<Array<EWMovieItem> | any>(resolve => {
+      this.apicall.getEWMovies().subscribe((data) => {
+        this.eventMovies = data;
+      })
+    })
+  }
+  /*
     return this.apicall.getEWMovies().subscribe((data) => {
       this.eventMovies = data;
       //*console.log("loadEWMovies data:", this.eventMovies);
@@ -111,8 +126,9 @@ export class EventComponent implements OnInit {
       //*console.log('compare? ', secTest < altTest);
       //*console.log('getHours: ', this.hoursConvert(seconds));
       //console.log(test);
-      })
-  }
+      /*return this.eventMovies;})
+      
+  } */
 
   // partial convert to get comparable date info for determing time ranges?
   //  May want to make this a 'time of day' specific thing?
@@ -169,26 +185,33 @@ export class EventComponent implements OnInit {
   }
 
 
-  setDate(event: MatDatepickerInputEvent<Date>) {
+  async setDate(event: MatDatepickerInputEvent<Date>) {
+    this.eventDate = `${event.value}`.substring(0, 15);
+    console.log("New EventDate: " + this.eventDate);
     this.loadEWMovies();
+    
+   
     /* if (this.eventDate !== '') {
       console.log("reloading movies")
       this.loadEWMovies();
     } */
-    console.log(event.value);
-    this.eventDate = `${event.value}`.substring(0, 15);
-    console.log("New EventDate: " + this.eventDate);
-    //this.loadEWMovies().then(() => this.filterMovies(this.eventDate));
-    
+    //*console.log(event.value);
+    //this.eventDate = `${event.value}`.substring(0, 15);
+    //console.log("New EventDate: " + this.eventDate);
+    //await this.loadEWMovies().then(await this.filterMovies(this.eventDate));
     
     //let timeoutID = setTimeout(this.filterMovies(this.eventDate), 300);
-    let test = setTimeout(() => {
+    if (this.eventMovies.length < 1) {
+    let test = setTimeout(async () => {
       console.log("attempting to filter eventMovies")
       this.filterMovies(this.eventDate);
       console.log("eventMoviesTO:", this.eventMovies.length);
       console.log("datefilteredTO:", this.filteredMovies.length);
       this.rangeBlock = false; 
-    }, 1000);
+    }, 1500);
+  } else {
+    this.filterMovies(this.eventDate);
+  }
     // clear error message if there was one from a previous date selection and attempted event creation.
     this.errormsg = '';
     console.log("eventMovies:", this.eventMovies.length);
@@ -199,15 +222,21 @@ export class EventComponent implements OnInit {
     } */
     //return this.filteredMovies;
   }
+  
+  /*filtertheMovies = new Promise<Array<EWMovieItem>>((resolve) => {
+    this.filterMovies(this.eventDate: string);
+    resolve()
 
+  }*/
   //filter all movies based on selected date
   // will update the shows[0].show scrrenings array with just the ones for the date selected
-  filterMovies(eventDate: string) {
+  filterMovies(eventDate: string) { //: Promise<Array<EWMovieItem> | any> { //= new Promise<Array<EWMovieItem>>((resolve) => { }
     // clear timefiltered selections from a previous date selection
     if (this.timeFilteredMovies.length > 0) {
       this.timeFilteredMovies.length = 0;
     }
-    //*console.log('filteredMovies() triggered')
+    console.log('filteredMovies() triggered')
+    //return new Promise<Array<EWMovieItem> | any>(resolve => {
     let filtered: EWMovieItem[] = JSON.parse(JSON.stringify(this.eventMovies));
     let target = eventDate.substring(0,11);
     //*console.log('target date: ', target)
@@ -241,12 +270,13 @@ export class EventComponent implements OnInit {
     //this.selectedMovies = this.filteredMovies;
     //*console.log("filtered Movies: ", this.filteredMovies);
     //*console.log("original Movies: ", this.eventMovies);
-  }
+  //})
+}
 
   // function for filtering by daytime ranges:
   //  clicking range button will further filter filteredMovies only showing screening times in that range
 
-    filterMoviesByTime(range: string) {  //morning/afternoon/evening
+    filterMoviesByTime(range: string): void {  //morning/afternoon/evening
       this.errormsg = '';
     if (this.eventMovies.length == 0) {
       console.log("no date selected!!");
@@ -418,4 +448,8 @@ export class IterablePipe implements PipeTransform {
   }
 }
 
+
+function filterMovies(eventDate: any, string: any) {
+  throw new Error('Function not implemented.');
+}
 

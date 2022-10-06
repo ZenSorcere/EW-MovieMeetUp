@@ -22,7 +22,7 @@ export class RankingService {
       const today = Date.parse(Date().toString().substring(0, 15));
       console.log('today: ', today);
       //setTimeout(() => {
-      if (data) {
+      
         for (let index in data) {
           let dateCheck = Date.parse(data[index].eventDate);
           //*console.log('dateCheck: ', dateCheck)
@@ -35,7 +35,7 @@ export class RankingService {
             this.movieEvents.push(data[index]); 
           }
         }
-      }
+      
       //}, 4000);
 
       this.sortMovieEvents();
