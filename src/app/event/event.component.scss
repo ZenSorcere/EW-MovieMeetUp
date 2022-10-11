@@ -39,7 +39,34 @@ app-topnav {
   
   justify-content: space-between;
 }
+mat-sidenav-container, .mat-sidenav-container, .mat-drawer-container {
+  position: unset;
+  z-index: unset;
+}
+.example-container {
+  /* display: absolute; */
+  /*align-items: center;
+  justify-content: center; */
+  /*height: 100%; */
+  /* width: 50%; */
+  position: absolute;
+  //position: fixed;
+  /* z-index: 1; */
+  top: 300;
+  left: 0;
+  right: 0;
+  //overflow-x: hidden;
 
+  background: white;
+}
+.example-sidenav {
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 200px;
+  background: yellow;
+  overflow-x: hidden;
+}
 mat-form-field {
   padding-top: 5%;
   width: 90%;
@@ -53,11 +80,11 @@ h3 {
 .fixedHead {
     top: 37px;
     width: 200px;
-    position: fixed;
+    position: fixed !important;
     /* z-index: 1;*/
     height: 100%;
     left: 0;
-    overflow-x: hidden;
+    //overflow-x: hidden;
     background-color: white;
     align-items: center;
   /*
@@ -70,28 +97,6 @@ h3 {
   border-bottom: 1px solid #3f51b5;  */
 }
 
-.example-container {
-  /* display: absolute; */
-  /*align-items: center;
-  justify-content: center; */
-  /*height: 100%; */
-  /* width: 50%; */
-  position: absolute;
-  /* z-index: 1; */
-  top: 300;
-  left: 0;
-  right: 0;
-  overflow-x: hidden;
-
-  background: white;
-}
-.example-sidenav {
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  width: 200px;
-  background: yellow;
-}
 .mobile-menu {
   background: white;
   color: black;
@@ -197,6 +202,7 @@ mat-radio-button {
   .movieTitle {
     font-size: x-small;
   }
+
   .fixedHead {
     width: 100%;
     height: 24%;
@@ -239,6 +245,7 @@ mat-radio-button {
   .example-sidenav {
     width: 0px;
     background: white;
+    //position: unset!important;
   }
   
   .example-content {

@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   imdbApiKey: "k_jr9zca59",
   demoUserID: "DEMO",
-  loginURL: "https://ike-easyware.herokuapp.com/home",
-  logoutURL: "https://ike-easyware.herokuapp.com/intro"
+  loginURL: "http://localhost:4200/home",
+  logoutURL: "http://localhost:4200/intro"
   
 };
 /* 
