@@ -208,7 +208,7 @@ export class EventComponent implements OnInit {
       console.log("eventMoviesTO:", this.eventMovies.length);
       console.log("datefilteredTO:", this.filteredMovies.length);
       this.rangeBlock = false; 
-    }, 2000);
+    }, 3000);
   } else {
     this.filterMovies(this.eventDate);
   }
