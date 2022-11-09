@@ -39,7 +39,36 @@ app-topnav {
   
   justify-content: space-between;
 }
+mat-sidenav-container, .mat-sidenav-container, .mat-drawer-container {
+  position: unset;
+  z-index: unset;
+  overflow:unset;
+}
+.example-container {
+  /* display: absolute; */
+  /*align-items: center;
+  justify-content: center; */
+  /*height: 100%; */
+  /* width: 50%; */
+  position: absolute;
+  //position: fixed;
+  /* z-index: 1; */
+  top: 300;
+  left: 0;
+  right: 0;
+  //overflow-x: hidden;
+  overflow: visible;
 
+  background: white;
+}
+.example-sidenav {
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 200px;
+  background: yellow;
+  overflow-x: hidden;
+}
 mat-form-field {
   padding-top: 5%;
   width: 90%;
@@ -53,11 +82,10 @@ h3 {
 .fixedHead {
     top: 37px;
     width: 200px;
-    position: fixed;
-    /* z-index: 1;*/
+    position: fixed !important;
     height: 100%;
     left: 0;
-    overflow-x: hidden;
+    //overflow-x: hidden;
     background-color: white;
     align-items: center;
   /*
@@ -70,28 +98,6 @@ h3 {
   border-bottom: 1px solid #3f51b5;  */
 }
 
-.example-container {
-  /* display: absolute; */
-  /*align-items: center;
-  justify-content: center; */
-  /*height: 100%; */
-  /* width: 50%; */
-  position: absolute;
-  /* z-index: 1; */
-  top: 300;
-  left: 0;
-  right: 0;
-  overflow-x: hidden;
-
-  background: white;
-}
-.example-sidenav {
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  width: 200px;
-  background: yellow;
-}
 .mobile-menu {
   background: white;
   color: black;
@@ -197,9 +203,10 @@ mat-radio-button {
   .movieTitle {
     font-size: x-small;
   }
+
   .fixedHead {
     width: 100%;
-    height: 24%;
+    height: 40%; //24%;
     //display: flex;
     //flex-direction: column;
   }
@@ -208,7 +215,8 @@ mat-radio-button {
   }*/
 
   .content {
-    margin-top:110px;
+    //margin-top:110px;
+    margin-top: 40%;
   }
   
       // all elements within will need to be rearranged and sized
@@ -226,7 +234,7 @@ mat-radio-button {
     margin-bottom: -1em;
   }
   h3 {
-    font-size:small;
+    //font-size:small;
     font-weight: bold;
     padding: 10px 0 0 0;
     margin-bottom: 0px;
@@ -237,8 +245,10 @@ mat-radio-button {
   
   
   .example-sidenav {
-    width: 0px;
+    width: 10px;
     background: white;
+    overflow: visible;
+    //position: unset!important;
   }
   
   .example-content {
