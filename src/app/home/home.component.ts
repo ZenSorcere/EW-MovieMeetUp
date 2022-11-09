@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   logoutURL= environment.logoutURL;
   // url that gets sent in the email for users to rank selected movies in events
   //url = 'https://moviemeetup.com/ranking/';
-  url = 'https://localhost:4200/ranking/';
+  url = 'https://ike-easyware.herokuapp.com/ranking/';
   //today: any;
   //date = new Date();
   host = sessionStorage.getItem('hostID');
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     //*console.log("session storage-host: "+ sessionStorage.getItem('hostID'));
-    //*console.log("firstLoad: ", this.firstLoad);
+    console.log("firstLoad: ", this.firstLoad);
     this.rankingService.loadMovieEventsByHostID(String(sessionStorage.getItem('hostID')));
     this.movieEvents = this.rankingService.sortMovieEvents();
     setTimeout(() => { 
