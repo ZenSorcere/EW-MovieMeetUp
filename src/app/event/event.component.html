@@ -42,6 +42,12 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Estimate # of Guests</mat-label>
+          <input matInput type="number" [(ngModel)]="estimatedGuests" />
+          <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
+        </mat-form-field>
       </div>
 
       <h3 class="trim">2. Filter the selected day by time ranges, if desired!</h3>

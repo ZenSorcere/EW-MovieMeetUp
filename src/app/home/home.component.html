@@ -110,12 +110,13 @@
                 {{ viewing.eventRankings?.length }}
               </td> -->
               <td *ngIf="viewing.eventRankings; else dispZero">
+                {{viewing.eventRankings.length}} of {{ viewing.estimatedGuests }}:
                 <ul class="no-bullets" *ngFor="let ranking of viewing.eventRankings">
                   <li>{{ ranking.userID }}</li>
                 </ul>
               </td>
               <ng-template #dispZero>
-                <td>0</td>
+                <td>0 of {{ viewing.estimatedGuests }}</td>
               </ng-template>
               <td>
                 <a class="flex-item"><mat-icon>delete</mat-icon></a>
