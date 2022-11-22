@@ -37,6 +37,7 @@ export class FinalRankingComponent implements OnInit {
   userRankings: RankUpdate[] = [];
   data: any;
   topChoices: String[] = [];
+  gathering: MovieEvent | undefined;
 
   constructor(
     public apicall: ApicallService, 
@@ -53,7 +54,8 @@ export class FinalRankingComponent implements OnInit {
     
     // KEEP THIS ONE
     this.movieEvent = this.route.snapshot.data.finalRanking;
-    //console.log("this.movieEvent", this.movieEvent);
+    console.log("finranking--movieEvent", this.movieEvent);
+    
     this.dialog.closeAll();
     this.loadMoviesFromEvent();
   }
@@ -64,6 +66,7 @@ export class FinalRankingComponent implements OnInit {
       //this.eventTitle = this.movieEvent.eventTitle;
       this.eventDate = this.movieEvent.eventDate;
       this.movieItemArray = this.movieEvent.eventMovies;
+      console.log(this.movieEvent);
 
       if (this.movieEvent.eventRankings != undefined) {
         this.rankings = this.movieEvent.eventRankings;

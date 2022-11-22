@@ -45,9 +45,17 @@ table {
   max-width: 500px;
 }
 
+.poster-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
 .movie-card {
   //padding: auto;
-  width: 50%;
+  height: 19em;
+  width:22em;
   //width: 250px;
   //height: 450px;
   display: flex;
