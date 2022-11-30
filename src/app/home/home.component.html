@@ -105,6 +105,9 @@
                 >
                   Invite
                 </a>
+                <button mat-raised-button color="primary" (click)="sendResults(viewing.id)">
+                  Send Results
+                </button>
               </td>
               <!-- <td *ngIf="viewing.eventRankings; else dispZero">
                 {{ viewing.eventRankings?.length }}

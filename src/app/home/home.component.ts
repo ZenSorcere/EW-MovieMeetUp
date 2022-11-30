@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
 import jwtDecode, { JwtPayload }  from "jwt-decode";
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { EWMovieItem } from '../movies';
+import { FinalRankingResolve } from '../finalRanking.resolve';
 
 
 
@@ -31,7 +34,8 @@ export class HomeComponent implements OnInit {
   //date = new Date();
   host = sessionStorage.getItem('hostID');
   firstLoad = true;
-  
+  finalRankings: (EWMovieItem)[] = [];
+  finalRanking = new Map();
 
   constructor(private eventComponent: EventComponent, public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute) {
     };
@@ -49,7 +53,7 @@ export class HomeComponent implements OnInit {
       //*console.log('user events: ', this.movieEvents.length);
       this.firstLoad = false;
       //*console.log("firstLoad: ", this.firstLoad);
-    }, 4000);  
+    }, 5000);  
     //this.today = this.eventComponent.hoursConvert(this.date.getTime().toString());
     //console.log("today?: ", this.today);
   }
@@ -66,6 +70,22 @@ export class HomeComponent implements OnInit {
 
     return movietitles.join(', ');
     //}
+
+  }
+
+  getResults(eventID: string): Observable<MovieEvent> {
+    //let results = this.apicall.getFinalRankings(eventID);
+    //console.log("gr: ", results);
+    //return results;
+    return this.apicall.getFinalRankings(eventID);
+
+  } 
+
+  sendResults(eventID: string | undefined): Observable<MovieEvent> {
+    let results = this.getResults(eventID!);
+    console.log("sr: ", JSON.stringify(results));
+    //let finalRankings = results.finalRankings;
+    return results;
 
   }
 
