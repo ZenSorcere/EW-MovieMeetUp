@@ -22,4 +22,8 @@ export class FinalRankingResolve implements Resolve<MovieEvent> {
 
     return this.apicall.getFinalRankings(this.routeParams);
   }
+
+  dataReturn(eventID: string): Observable<MovieEvent> {
+    return this.apicall.dataReturn(eventID);
+  }
 }
