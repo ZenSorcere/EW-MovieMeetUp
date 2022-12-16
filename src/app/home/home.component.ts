@@ -38,12 +38,12 @@ export class HomeComponent implements OnInit {
   finalRanking = new Map();
   currentID: string = '';
   finEvent: MovieEvent | undefined
-  finurl = 'https://localhost:4200/finalranking/'
+  //finurl = 'https://localhost:4200/finalranking/'
+  finurl = 'https://ike-easyware.herokuapp.com/finalranking'
   finTitle: string = '';
   finRoom: string = '';
   finTime: string = '';
-  emailstring: string = `mailto:abc@abc.com?subject=files&body=${this.finTitle}`;
-
+  
   constructor(private eventComponent: EventComponent, public apicall: ApicallService, private router: Router, private rankingService: RankingService, private httpClient: HttpClient, private route: ActivatedRoute, private finranking: FinalRankingResolve) {
     };
 
