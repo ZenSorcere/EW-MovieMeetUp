@@ -49,7 +49,7 @@ export class EventComponent implements OnInit {
   eventID = '';
   //eventTitle = '';
   eventDate = '';
-  estimatedGuests = 0;
+  estimatedGuests = 0; //new FormControl(0, [Validators.min(2)]);
   selectedMovies: EWMovieItem[] = [];
   events = new Map();
   eventMovies: EWMovieItem[] = [];
@@ -362,12 +362,12 @@ export class EventComponent implements OnInit {
     };
     
     if (this.hostID === '' || this.eventDate === '' || this.estimatedGuests === 0) {
-      this.errormsg = 'You must have a Host ID, select a Date, and enter an estimated number of guests.';
+      this.errormsg = 'You must select a Date, and enter an estimated number of guests.';
       return;
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
       return;
-    } if (this.estimatedGuests === 0) {
+    } if (this.estimatedGuests < 1) {
       this.errormsg = 'Please enter an estimated number of guests.';
       return;
     } if (this.eventService.getNumSelected() < 3) {

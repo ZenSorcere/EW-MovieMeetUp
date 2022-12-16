@@ -158,14 +158,12 @@ export class HomeComponent implements OnInit {
   mailMe(){
     console.log("111111");
     console.log("22222");
-    
-    document.location = `mailto:?subject=${this.finEvent!.hostID}%20has%20invited%20you%20to%20a%20gathering%20at%20Circle%20Cinema%20on%20'${
+    //document.location.reload();
+    document.location.href = `mailto:?subject=${this.finEvent!.hostID}%20has%20determined%20the%20winning%20movie%20for%20the%20gathering%20at%20Circle%20Cinema%20on%20'${
       this.finEvent!.eventDate
-    }'&body=We are planning a gathering to watch a movie at Circle Cinema on ${this.finEvent!.eventDate}.%0AYou are invited to vote on which movies and screening times are your top choices.%0AThe movies showing on ${this.finEvent!.eventDate} are:%0A%0A${this.getEventTitles(this.finEvent!.id)}%0A%0ABefore%20${
-      this.finEvent!.eventDate
-    }, please click on the link below and rank the screening options:%0A%0A${ this.finurl }${
+    }'&body=The winning movie has been determined! We will be seeing:%0A%0A${this.finTitle} - ${this.finTime} - ${this.finRoom}%0A%0Aat Circle Cinema on ${this.finEvent!.eventDate}. Please use this link to buy your tickets:%0A%0A${this.finEvent!.finalRankings![0].screeninglink}%0A%0AYou can also click on the link below to see the final results and purchase your tickets from there:%0A%0A${ this.finurl }${
       this.finEvent!.id
-    }%0A%0AI'll let you know when the voting has ended. You can use this same link to purchase tickets to our chosen film.%0A%0AThanks for your input - looking forward to seeing you at Circle Cinema!%0A%0A${this.finEvent!.hostID}%0A%0A${this.finTitle}`;
+    }%0A%0AI look forward to seeing you at Circle Cinema!%0A%0A${this.finEvent!.hostID}%0A%0A`;
 }
 
 }

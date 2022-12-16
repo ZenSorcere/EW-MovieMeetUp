@@ -43,9 +43,9 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="guests">
           <mat-label>Estimate # of Guests</mat-label>
-          <input matInput type="number" [(ngModel)]="estimatedGuests" />
+          <input matInput type="number" placeholder="0" [(ngModel)]="estimatedGuests" />
           <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
         </mat-form-field>
       </div>
