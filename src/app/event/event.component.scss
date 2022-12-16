@@ -233,6 +233,11 @@ mat-radio-button {
     font-size: xx-small;
     margin-bottom: -1em;
   }
+
+  .guests {
+    padding-left: .5em;
+  }
+  
   h3 {
     //font-size:small;
     font-weight: bold;
@@ -299,7 +304,7 @@ mat-radio-button {
 
 @media only screen and (min-width: 900px) {
   .desktop {
-    display: flex;
+    //display: flex;
     justify-content:center;
   }
 }

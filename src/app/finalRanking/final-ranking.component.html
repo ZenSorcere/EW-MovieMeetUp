@@ -3,7 +3,9 @@
   <!-- <h1>Event Title: {{ eventTitle }}</h1> -->
   <!-- <h2>Event Date: {{ eventDate }}</h2> -->
 
-  <h3 class="pageTop">Top Selected Movie(s):</h3>
+  <!-- <h3 class="pageTop">Top Selected Movie(s):</h3> -->
+  <h3 class="pageTop">Results To Date -- Not All Votes Are In!</h3>
+  <p>Don't purchase tickets till you hear from {{movieEvent!.hostID!}}!</p>
   <ng-container *ngIf="finalRankings">
     <div class="content">
       <div *ngIf="finalRankings.length == 0"> 
@@ -13,27 +15,41 @@
         There is a {{ topChoices.length }}-way tie!
       </div>
       <div class="cardHeader">
+        <ng-container *ngFor="let entry of finalRankings; let i = index">
+          <div *ngIf="i < topChoices.length">
+            <p>{{finalRankings[i].title}} - {{ this.rankingConvert(finalRankings[i].timestamp!) }} - {{ finalRankings[i].room }}</p>
+          </div>
+        </ng-container>
+        <!--
         <p>{{ topChoices }}</p>
         <p>{{ this.rankingConvert(finalRankings[0].timestamp!) }}</p>
         <p>{{ finalRankings[0].room }}</p>
+        -->
       </div>
-      <mat-card *ngIf="rankings" class="movie-card">
-        <!--<div class="content" *ngIf="finalRankings">
-          <app-movie-card [movie]="finalRankings[0]"> </app-movie-card>
-        </div>-->
-        <div *ngIf="finalRankings.length > 0" class="content">
-          <img
-            mat-card-image
-            src="{{ finalRankings[0].poster }}"
-            alt="Movie Poster for {{ finalRankings[0].title }}"
-          />
-        </div>
-      </mat-card>
+      <div class="poster-container">
+        <ng-container *ngFor="let entry of finalRankings; let i = index">
+          <div *ngIf="i < topChoices.length">
+          <!--<div class="content" *ngIf="finalRankings">
+            <app-movie-card [movie]="finalRankings[0]"> </app-movie-card>
+          </div>-->
+            <app-movie-card [movie]="entry" class="movie-card"> </app-movie-card>
+            <!-- <mat-card class="movie-card">
+              <div class="content">
+                <img
+                  mat-card-image
+                  src="{{ finalRankings[i].poster }}"
+                  alt="Movie Poster for {{ finalRankings[i].title }}"
+                />
+              </div>
+            </mat-card> -->
+          </div>
+        </ng-container>
+      </div>
       <a href="{{ finalRankings[0].screeninglink! }}" target="_blank">Buy Tickets!</a>
     </div>
   </ng-container>
 
-  <h3 *ngIf="finalRankings.length > 0">Final Rankings:</h3>
+  <h3 *ngIf="finalRankings.length > 0">Current/Final Rankings:</h3>
   <div *ngIf="finalRankings.length > 0" class="col-md-12">
     <table class="table table-bordered">
       <thead>
@@ -54,7 +70,15 @@
     <table class="voter-table">
       <thead>
         <tr>
-          <th class="left-aligned" scope="col">Voters</th>
+
+          <th *ngIf="rankings; else dispZero" class="left-aligned" scope="col">
+            Voters ({{ rankings.length }} of {{ movieEvent!.estimatedGuests! }}):
+          </th>
+          <ng-template #dispZero>
+            <td>Voters (0 of {{ movieEvent!.estimatedGuests! }}):</td>
+          </ng-template>
+
+          <!-- <th class="left-aligned" scope="col">Voters ({{ movieEvent.eventRankings.length }} of {{movieEvent.estimatedGuests}}):</th> -->
         </tr>
       </thead>
       <tbody>

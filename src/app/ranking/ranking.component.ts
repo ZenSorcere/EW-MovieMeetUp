@@ -75,7 +75,7 @@ export class RankingComponent implements OnInit {
 
     // Find the event that corresponds with the id provided in route
     this.movieEvent = this.route.snapshot.data.movieEvent;
-    //*console.log("movieEvent", this.movieEvent);
+    console.log("ranking--movieEvent", this.movieEvent);
     //this.findMovieEventByEventID();
     
     this.loadMoviesFromEvent();

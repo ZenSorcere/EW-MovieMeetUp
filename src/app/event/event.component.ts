@@ -28,6 +28,7 @@ export interface MovieEvent {
   hostID: string;
   //eventTitle: string;
   eventDate: string;
+  estimatedGuests: number;
   eventMovies?: (EWMovieItem) [];
   selectedMovies: EWMovieItem[];
   //invitees?: (EventInvitees) [] | null;
@@ -48,6 +49,7 @@ export class EventComponent implements OnInit {
   eventID = '';
   //eventTitle = '';
   eventDate = '';
+  estimatedGuests = 0; //new FormControl(0, [Validators.min(2)]);
   selectedMovies: EWMovieItem[] = [];
   events = new Map();
   eventMovies: EWMovieItem[] = [];
@@ -184,7 +186,10 @@ export class EventComponent implements OnInit {
     //return new Date(+dateParts[0], dateParts[1] - 1, +dateParts[2]);
   }
 
-
+  setGuests(number: number) {
+    this.estimatedGuests = number;
+    console.log("EstGuests: ", this.estimatedGuests);
+  }
   async setDate(event: MatDatepickerInputEvent<Date>) {
     this.eventDate = `${event.value}`.substring(0, 15);
     console.log("New EventDate: " + this.eventDate);
@@ -337,6 +342,7 @@ export class EventComponent implements OnInit {
   resetFilters() {
     this.timeFilteredMovies.length = 0;
     this.errormsg = '';
+    this.estimatedGuests = 0;
     this.filterMovies(this.eventDate);
     console.log('filters reset');
   }
@@ -355,11 +361,14 @@ export class EventComponent implements OnInit {
       this.hostID = this.sessionhostID
     };
     
-    if (this.hostID === '' || this.eventDate === '') {
-      this.errormsg = 'You must have a Host ID and select a Date.';
+    if (this.hostID === '' || this.eventDate === '' || this.estimatedGuests === 0) {
+      this.errormsg = 'You must select a Date, and enter an estimated number of guests.';
       return;
     } if (this.eventDate === null) {
       this.errormsg = 'You must select an actual Date.';
+      return;
+    } if (this.estimatedGuests < 1) {
+      this.errormsg = 'Please enter an estimated number of guests.';
       return;
     } if (this.eventService.getNumSelected() < 3) {
       this.errormsg = 'You must have at least three movie times for guests to choose from.';
@@ -376,6 +385,7 @@ export class EventComponent implements OnInit {
       hostID: this.hostID,
       //eventTitle : this.eventTitle,
       eventDate : this.eventDate,
+      estimatedGuests: this.estimatedGuests,
       selectedMovies : [...this.eventService.getSelectedMovies()]
     };
     // Verify newEvent object created with correct info successfully
@@ -399,6 +409,7 @@ export class EventComponent implements OnInit {
     this.errormsg = '';
     this.date = new FormControl(new Date());
     //this.labelReset();
+    this.estimatedGuests = 0;
     this.eventService.resetMovieArray();
     this.filteredMovies.length = 0;
     this.timeFilteredMovies.length = 0;

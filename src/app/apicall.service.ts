@@ -156,17 +156,31 @@ export class ApicallService {
   // get FinalRanking data from DynamoDB
   // return the Final Rankings for an Event by eventID
   getFinalRankings(id: string): Observable<MovieEvent> {
-    //console.log("id for queryStringParameters:", id);
+    console.log("id for queryStringParameters:", id);
     const options = id ? 
-    { params : new HttpParams().set('id', id)} : {};
-    //*console.log("options for the FinalRanking: ", options);
+    { params : new HttpParams().append('id', id)} : {};
+    console.log("options for the FinalRanking: ", options);
     return this.http.get<MovieEvent>(`https://j6ywe1e02a.execute-api.us-west-2.amazonaws.com/EWFinalRankings`, options).
       pipe(
         map((data) => {
-          //*console.log(data);
-          //*console.log("getFinalRankings() data: " + JSON.stringify(data));
+          console.log(data);
+          console.log("getFinalRankings() data: " + JSON.stringify(data));
           return data ?? [];
         })
       )
+  }
+  // attempt to call lambda function url for final ranking info on homepage
+  dataReturn(eventID: string): Observable<MovieEvent> {
+    const options = eventID ? 
+    { params : new HttpParams().append('id', eventID)} : {};
+    console.log("options for the dataReturn: ", options);
+  return this.http.get<MovieEvent>(`https://37knewzbfap5fhnau5tq374xsm0ahhhi.lambda-url.us-west-2.on.aws/`, options).
+    pipe(
+      map((data) => {
+        console.log(data);
+        console.log("getFinalRankings() data: " + JSON.stringify(data));
+        return data ?? "[nope]";
+      })
+    )
   }
 }
