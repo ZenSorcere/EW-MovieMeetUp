@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
   currentID: string = '';
   finEvent: MovieEvent | undefined
   //finurl = 'https://localhost:4200/finalranking/'
-  finurl = 'https://ike-easyware.herokuapp.com/finalranking'
+  finurl = 'https://ike-easyware.herokuapp.com/finalranking/'
   finTitle: string = '';
   finRoom: string = '';
   finTime: string = '';
