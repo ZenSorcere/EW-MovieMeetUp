@@ -4,10 +4,16 @@ h1 {
 
 .pageTop {
   margin-top: 2em;
+  padding-top: 20px;
 }
 h3 {
   text-align: center;
-  padding-top: 20px;
+  margin: 0;
+  //padding-top: 20px;
+}
+
+.no-results {
+  margin-top: 5em;
 }
 
 img {
@@ -20,9 +26,17 @@ img {
   object-position: bottom;
 }
 
+.col-md-12 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
 table {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 1.5em;
+  width: 100%;
 }
 
 .left-aligned {
@@ -31,11 +45,15 @@ table {
 
 .cardHeader {
   text-align: center;
-  margin: 16px;
+  //margin: 16px;
   font-size: medium;
   font-weight: bold;
-  padding: 20px;
+  padding: 1em 0 0 0;
   overflow-wrap: normal;
+}
+
+.cardHeader p {
+  margin: 0;
 }
 
 .container {
@@ -66,7 +84,7 @@ table {
 }
 
 a {
-  margin: 1em;
+  margin: 0 0 .5em 0;
   padding: .5em 1em;
   width: 50%;
 }
@@ -90,4 +108,10 @@ a:hover, a:active {
 
 .points {
   text-align: center;
+}
+
+@media only screen and (max-width: 440px) {
+  .col-md-12 {
+    width: 100%;
+  }
 }

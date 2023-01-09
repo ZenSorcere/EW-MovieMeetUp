@@ -161,7 +161,7 @@ export class HomeComponent implements OnInit {
     //document.location.reload();
     document.location.href = `mailto:?subject=${this.finEvent!.hostID}%20has%20determined%20the%20winning%20movie%20for%20the%20gathering%20at%20Circle%20Cinema%20on%20'${
       this.finEvent!.eventDate
-    }'&body=The winning movie has been determined! We will be seeing:%0A%0A${this.finTitle} - ${this.finTime} - ${this.finRoom}%0A%0Aat Circle Cinema on ${this.finEvent!.eventDate}. Please use this link to buy your tickets:%0A%0A${this.finEvent!.finalRankings![0].screeninglink}%0A%0AYou can also click on the link below to see the final results and purchase your tickets from there:%0A%0A${ this.finurl }${
+    }'&body=The winning movie has been determined! We will be seeing:%0A%0A${this.finTitle} - ${this.finTime} - ${this.finRoom} at Circle Cinema, on ${this.finEvent!.eventDate}.%0A%0APlease use this link to buy your tickets:%0A${this.finEvent!.finalRankings![0].screeninglink}%0A%0AYou can also click on this link to see the final results and purchase your tickets from there:%0A${ this.finurl }${
       this.finEvent!.id
     }%0A%0AI look forward to seeing you at Circle Cinema!%0A%0A${this.finEvent!.hostID}%0A%0A`;
 }
