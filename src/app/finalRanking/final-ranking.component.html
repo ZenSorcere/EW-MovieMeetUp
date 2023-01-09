@@ -5,10 +5,10 @@
 
   <!-- <h3 class="pageTop">Top Selected Movie(s):</h3> -->
   <h3 class="pageTop">Results To Date -- Not All Votes Are In!</h3>
-  <p>Don't purchase tickets till you hear from {{movieEvent!.hostID!}}!</p>
+  <h3>Don't purchase tickets till you hear from {{movieEvent!.hostID!}}!</h3>
   <ng-container *ngIf="finalRankings">
     <div class="content">
-      <div *ngIf="finalRankings.length == 0"> 
+      <div *ngIf="finalRankings.length == 0" class="no-results"> 
         No rankings submitted. Submit at least one ranking to see the final selection!
       </div>
       <div *ngIf="topChoices.length > 1">
@@ -45,7 +45,7 @@
           </div>
         </ng-container>
       </div>
-      <a href="{{ finalRankings[0].screeninglink! }}" target="_blank">Buy Tickets!</a>
+      <a *ngIf="finalRankings.length > 0" href="{{ finalRankings[0].screeninglink! }}" target="_blank">Buy Tickets!</a>
     </div>
   </ng-container>
 

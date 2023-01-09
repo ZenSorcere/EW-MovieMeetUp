@@ -70,14 +70,15 @@ mat-sidenav-container, .mat-sidenav-container, .mat-drawer-container {
   overflow-x: hidden;
 }
 mat-form-field {
-  padding-top: 5%;
+  //padding-top: 5%;
   width: 90%;
 
 
 }
 
 h3 {
-  padding: 5%;
+  padding: 3%;
+  margin: 0;
 }
 .fixedHead {
     top: 37px;
@@ -206,7 +207,7 @@ mat-radio-button {
 
   .fixedHead {
     width: 100%;
-    height: 40%; //24%;
+    height: 30%; //24%;
     //display: flex;
     //flex-direction: column;
   }
@@ -230,7 +231,7 @@ mat-radio-button {
   mat-form-field {
     width: 40%;
     padding: 0;
-    font-size: xx-small;
+    font-size: small;
     margin-bottom: -1em;
   }
 

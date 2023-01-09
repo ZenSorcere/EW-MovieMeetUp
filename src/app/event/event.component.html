@@ -22,14 +22,14 @@
     -->
     <h3>1. Select a date for your gathering to see what's playing that day.</h3>
       <div class="desktop">
-        <p>
-          <!-- <mat-form-field appearance="fill">
+        <!-- <p>
+           <mat-form-field appearance="fill">
             <mat-label>Enter Event Title</mat-label>
             <input matInput type="text" [(ngModel)]="eventTitle" />
             <mat-error>{{ getErrorMessage() }}</mat-error
           </mat-form-field>
-        -->
-        </p>
+        
+        </p> -->
         
         <mat-form-field appearance="fill">
           <mat-label id="default">Choose a Date</mat-label>
@@ -44,7 +44,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="guests">
-          <mat-label>Estimate # of Guests</mat-label>
+          <mat-label># of people being invited?</mat-label>
           <input matInput type="number" placeholder="0" [(ngModel)]="estimatedGuests" />
           <!-- <mat-error>{{ getErrorMessage() }}</mat-error> -->
         </mat-form-field>
